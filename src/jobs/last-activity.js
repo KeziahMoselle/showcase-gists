@@ -43,6 +43,10 @@ async function getLastActivity () {
     case 'WatchEvent':
       message = `Watched ${event.repo.name}`
       break
+
+    case 'PublicEvent':
+      message = `Made public ${event.repo.name}`
+      break
   
     default:
       message = 'This type of event is not supported.'
