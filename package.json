@@ -1,0 +1,25 @@
+{
+  "name": "showcase-gists",
+  "version": "1.0.0",
+  "description": "Showcase Gists on your profile",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^16.28.0",
+    "dotenv": "^8.0.0",
+    "lowdb": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeziahMoselle/last-activity-to-gist.git"
+  },
+  "author": "KeziahMoselle <keziah.moselle@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/KeziahMoselle/last-activity-to-gist/issues"
+  },
+  "homepage": "https://github.com/KeziahMoselle/last-activity-to-gist#readme"
+}
