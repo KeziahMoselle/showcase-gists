@@ -1,6 +1,12 @@
 const octokit = require('../libs/octokit')
 const save = require('../libs/gist')
 
+
+/**
+ * Fetch the last public event from GitHub
+ *
+ * @returns
+ */
 async function getLastActivity () {
   const { data } = await octokit.activity.listEventsForUser({
     username: process.env.GITHUB_USERNAME

@@ -1,6 +1,12 @@
 const save = require('../libs/gist')
 const T = require('../libs/twitter')
 
+
+/**
+ * Fetch the last tweet
+ *
+ * @returns
+ */
 async function getLastTweet () {
   const { data } = await T.get('statuses/user_timeline', {
     screen_name: process.env.TWITTER_USERNAME,

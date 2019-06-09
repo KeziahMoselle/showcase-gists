@@ -1,6 +1,14 @@
 const octokit = require('./octokit')
 const store = require('./store')
 
+
+/**
+ * Create or Update a Gist
+ *
+ * @param {string} jobName
+ * @param {object} files
+ * @returns
+ */
 async function save (jobName, files) {
   // Check if there is already an ID linked to the jobName
   const id = store.get(jobName)
@@ -25,6 +33,13 @@ async function save (jobName, files) {
   }
 }
 
+/**
+ * Update an existing Gist
+ *
+ * @param {string} gist_id
+ * @param {object} files
+ * @returns
+ */
 function update (gist_id, files) {
   octokit.gists.update({
     gist_id,
