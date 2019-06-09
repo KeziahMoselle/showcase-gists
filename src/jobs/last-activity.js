@@ -26,9 +26,13 @@ async function getLastActivity () {
       break
 
     case 'PushEvent':
-      message = 'Pushed commits: ';
-      for (const commit in event.payload.commits){
-        message += `${event.payload.commits[commit].message} ;`
+      if (event.payload.size > 1) {
+        message = 'Pushed commits: ';
+        for (const commit in event.payload.commits){
+          message += `${event.payload.commits[commit].message} ;`
+        }
+      } else {
+        message = `Pushed commit: ${event.payload.commits[0].message}`
       }
       break
 
