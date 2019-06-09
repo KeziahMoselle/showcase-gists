@@ -20,6 +20,8 @@ async function save (jobName, files) {
 
     // Save the jobName and Gist ID
     store.set(jobName, data.id)
+
+    return `Successfully created Gist for ${jobName}. (${data.id})`
   }
 }
 
@@ -30,6 +32,8 @@ function update (gist_id, files) {
       ...files
     }
   })
+
+  return `Successfully updated ${gist_id}.`
 }
 
 module.exports = save

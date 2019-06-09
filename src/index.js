@@ -1,4 +1,19 @@
 require('dotenv').config()
-const getLastActivity = require('./jobs/last-activity')
 
-getLastActivity()
+// Jobs to load
+const jobs = [
+  'last-activity',
+  'last-tweet'
+]
+
+// Load jobs
+const jobsModules = []
+
+jobs.forEach(job => {
+  jobsModules.push(require(`./jobs/${job}`))
+})
+
+// Run jobs
+for (const job of jobsModules) {
+  job()
+}
