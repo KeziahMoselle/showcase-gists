@@ -8,34 +8,38 @@ const T = require('../libs/twitter')
  * @returns
  */
 async function getLastTweet () {
-  const { data } = await T.get('statuses/user_timeline', {
-    screen_name: process.env.TWITTER_USERNAME,
-    count: 1
-  })
-
-  const tweet = data[0]
-  let message
-  let link
-
-  if (tweet.retweeted) {
-    message = `RT: ${tweet.retweeted_status.user.name}\n> ${tweet.retweeted_status.text}`
-    link = getTwitterLink(tweet.retweeted_status.user.screen_name, tweet.retweeted_status.id_str)
-  } else if (tweet.in_reply_to_screen_name) {
-    message = `Replied to ${tweet.in_reply_to_screen_name}:\n> ${tweet.text}`
-    link = getTwitterLink(tweet.user.screen_name, tweet.id_str)
-  } else {
-    message = `Tweet: ${tweet.text}`
-    link = getTwitterLink(tweet.user.screen_name, tweet.id_str)
-  }
-
-  console.log(message)
-  console.log(link)
-
-  return save('lastTweet', {
-    'Last Tweet :': {
-      content: `${message}\n${link}`
+  try {
+    const { data } = await T.get('statuses/user_timeline', {
+      screen_name: process.env.TWITTER_USERNAME,
+      count: 1
+    })
+  
+    const tweet = data[0]
+    let message
+    let link
+  
+    if (tweet.retweeted) {
+      message = `RT: ${tweet.retweeted_status.user.name}\n> ${tweet.retweeted_status.text}`
+      link = getTwitterLink(tweet.retweeted_status.user.screen_name, tweet.retweeted_status.id_str)
+    } else if (tweet.in_reply_to_screen_name) {
+      message = `Replied to ${tweet.in_reply_to_screen_name}:\n> ${tweet.text}`
+      link = getTwitterLink(tweet.user.screen_name, tweet.id_str)
+    } else {
+      message = `Tweet: ${tweet.text}`
+      link = getTwitterLink(tweet.user.screen_name, tweet.id_str)
     }
-  })
+  
+    console.log(message)
+    console.log(link)
+  
+    return save('lastTweet', {
+      'Last Tweet :': {
+        content: `${message}\n${link}`
+      }
+    })
+  } catch (error) {
+    console.log(`Skipping lastTweet job.\n(Error: ${error})`)
+  }
 }
 
 /**
