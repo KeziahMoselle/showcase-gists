@@ -2,8 +2,9 @@ require('dotenv').config()
 
 // Jobs to load
 const jobs = [
-  'last-activity',
-  'last-tweet'
+  //'last-activity',
+  //'last-tweet',
+  'wakatime-stats'
 ]
 
 // Load jobs
