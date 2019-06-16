@@ -2,9 +2,9 @@ require('dotenv').config()
 
 // Jobs to load
 const jobs = [
-  'last-activity',
-  'last-tweet',
-  'wakatime-stats'
+  //'last-activity',
+  //'last-tweet',
+  //'wakatime-stats'
 ]
 
 // Load jobs
@@ -16,7 +16,9 @@ jobs.forEach(job => {
 
 // No jobs found
 if (jobsModules.length === 0) {
-  throw new Error('No jobs to load. Make sure you have at least 1 job uncommented.')
+  const { getGistsId } = require('./libs/gist')
+  getGistsId()
+  //throw new Error('No jobs to load. Make sure you have at least 1 job uncommented.')
 }
 
 // Run jobs

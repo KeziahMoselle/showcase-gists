@@ -1,4 +1,4 @@
-const save = require('../libs/gist')
+const { save } = require('../libs/gist')
 const T = require('../libs/twitter')
 
 

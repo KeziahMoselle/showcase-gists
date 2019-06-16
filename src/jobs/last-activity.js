@@ -1,5 +1,5 @@
 const octokit = require('../libs/octokit')
-const save = require('../libs/gist')
+const { save } = require('../libs/gist')
 
 
 /**

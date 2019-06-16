@@ -51,4 +51,16 @@ function update (gist_id, files) {
   return `Successfully updated ${gist_id}.`
 }
 
-module.exports = save
+
+async function getGistsId () {
+  const { data } = await octokit.gists.listPublicForUser({
+    username: process.env.GITHUB_USERNAME
+  })
+
+  console.log(data)
+}
+
+module.exports = {
+  save,
+  getGistsId
+}

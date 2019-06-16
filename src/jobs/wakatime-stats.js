@@ -1,5 +1,5 @@
 const axios = require('axios')
-const save = require('../libs/gist')
+const { save } = require('../libs/gist')
 
 const API_KEY = Buffer.from(process.env.WAKATIME_KEY).toString('base64')
 
