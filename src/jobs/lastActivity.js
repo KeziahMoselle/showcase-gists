@@ -1,6 +1,6 @@
 const octokit = require('../libs/octokit')
 const { save } = require('../libs/gist')
-
+const generateBox = require('../helpers/generateBox')
 
 /**
  * Fetch the last public event from GitHub
@@ -64,11 +64,13 @@ async function getLastActivity () {
         break
     }
   
-    console.log(`[${repo}]\n> ${message}`)
+    
+    message = generateBox(`[${repo}]\n> ${message}`)
+    console.log(message)
   
     return save('lastActivity', {
       'Last Activity :': {
-        content: `[${repo}]\n> ${message}`
+        content: message
       }
     })
   } catch (error) {

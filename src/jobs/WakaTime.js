@@ -1,5 +1,6 @@
 const axios = require('axios')
 const { save } = require('../libs/gist')
+const generateBox = require('../helpers/generateBox')
 
 const API_KEY = Buffer.from(process.env.WAKATIME_KEY).toString('base64')
 
@@ -19,8 +20,7 @@ async function getWakatimeStats () {
       }
     })
   
-    const message = data.data.human_readable_total_including_other_language
-
+    const message = generateBox(`⏳ Last year activity:\n${data.data.human_readable_total_including_other_language}`)
     console.log(message)
   
     return save('WakaTime', {

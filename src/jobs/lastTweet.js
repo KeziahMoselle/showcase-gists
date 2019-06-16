@@ -1,6 +1,6 @@
 const { save } = require('../libs/gist')
 const T = require('../libs/twitter')
-
+const generateBox = require('../helpers/generateBox')
 
 /**
  * Fetch the last tweet
@@ -19,22 +19,22 @@ async function getLastTweet () {
     let link
   
     if (tweet.retweeted) {
-      message = `RT: ${tweet.retweeted_status.user.name}\n> ${tweet.retweeted_status.text}`
+      message = `🔁 RT: ${tweet.retweeted_status.user.name}\n> ${tweet.retweeted_status.text}`
       link = getTwitterLink(tweet.retweeted_status.user.screen_name, tweet.retweeted_status.id_str)
     } else if (tweet.in_reply_to_screen_name) {
-      message = `Replied to ${tweet.in_reply_to_screen_name}:\n> ${tweet.text}`
+      message = `💬 Replied to ${tweet.in_reply_to_screen_name}:\n> ${tweet.text}`
       link = getTwitterLink(tweet.user.screen_name, tweet.id_str)
     } else {
-      message = `Tweet: ${tweet.text}`
+      message = `💬 Tweet: ${tweet.text}`
       link = getTwitterLink(tweet.user.screen_name, tweet.id_str)
     }
-  
+
+    message = generateBox(`${message}\n${link}`)
     console.log(message)
-    console.log(link)
   
     return save('lastTweet', {
       'Last Tweet :': {
-        content: `${message}\n${link}`
+        content: message
       }
     })
   } catch (error) {
