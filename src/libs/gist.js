@@ -51,4 +51,26 @@ function update (gist_id, files) {
   return `Successfully updated ${gist_id}.`
 }
 
-module.exports = save
+
+async function getGistsId (jobs) {
+  const { data: gists } = await octokit.gists.listPublicForUser({
+    username: process.env.GITHUB_USERNAME
+  })
+
+  for (const gist of gists) {
+    const jobIndex = jobs.indexOf(gist.description)
+    // The gist is a job
+    if (jobIndex > -1) {
+      // If the gist is already created but no id is found in the db
+      if (!store.get(gist.description)) {
+        // Set the Gist id
+        store.set(jobs[jobIndex], gist.id)
+      }
+    }
+  }
+}
+
+module.exports = {
+  save,
+  getGistsId
+}

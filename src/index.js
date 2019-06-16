@@ -1,18 +1,20 @@
 require('dotenv').config()
+const { getGistsId } = require('./libs/gist')
 
 // Jobs to load
 const jobs = [
-  'last-activity',
-  'last-tweet',
-  'wakatime-stats'
+  'lastActivity',
+  'lastTweet',
+  'WakaTime'
 ]
+
+// Fetch Gist id if missing
+getGistsId(jobs)
 
 // Load jobs
 const jobsModules = []
 
-jobs.forEach(job => {
-  jobsModules.push(require(`./jobs/${job}`))
-})
+jobs.forEach(job => jobsModules.push(require(`./jobs/${job}`)))
 
 // No jobs found
 if (jobsModules.length === 0) {
