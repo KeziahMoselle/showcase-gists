@@ -11,11 +11,17 @@ const store = require('./store')
  */
 async function save (jobName, files) {
   // Check if there is already an ID linked to the jobName
-  const id = store.get(jobName)
+  const id = store.get(`${jobName}.id`)
 
   // If id -> Update existing Gist
   if (id) {
-    update(id, files)
+    // If there is changes -> Update it
+    const data = store.get(`${jobName}.message`)
+    // Local data !== Fresh data
+    if (data[jobName].content !== files[jobName].content) {
+      update(id, files)
+      store.set(`${jobName}.message`, files)
+    }
   } else {
     // Create a new Gist
     const { data } = await octokit.gists.create({
@@ -26,8 +32,9 @@ async function save (jobName, files) {
       public: true
     })
 
-    // Save the jobName and Gist ID
-    store.set(jobName, data.id)
+    // Save job's data
+    store.set(`${jobName}.id`, data.id)
+    store.set(`${jobName}.message`, files)
 
     return `Successfully created Gist for ${jobName}. (${data.id})`
   }
@@ -62,9 +69,10 @@ async function getGistsId (jobs) {
     // The gist is a job
     if (jobIndex > -1) {
       // If the gist is already created but no id is found in the db
-      if (!store.get(gist.description)) {
+      if (!store.get(`${gist.description}.id`)) {
         // Set the Gist id
-        store.set(jobs[jobIndex], gist.id)
+        store.set(`${jobs[jobIndex]}.id`, gist.id)
+        store.set(`${jobs[jobIndex]}.message`, gist.files)
       }
     }
   }

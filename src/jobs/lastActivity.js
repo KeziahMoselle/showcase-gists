@@ -69,7 +69,7 @@ async function getLastActivity () {
     console.log(message)
   
     return save('lastActivity', {
-      'Last Activity :': {
+      'lastActivity': {
         content: message
       }
     })

@@ -24,7 +24,7 @@ async function getWakatimeStats () {
     console.log(message)
   
     return save('WakaTime', {
-      'Last year WakaTime stats :': {
+      'WakaTime': {
         content: message
       }
     })

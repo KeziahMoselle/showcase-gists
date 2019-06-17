@@ -33,7 +33,7 @@ async function getLastTweet () {
     console.log(message)
   
     return save('lastTweet', {
-      'Last Tweet :': {
+      'lastTweet': {
         content: message
       }
     })
