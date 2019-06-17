@@ -59,6 +59,14 @@ function update (gist_id, files) {
 }
 
 
+
+/**
+ * Fetch public gists
+ * Detects already created jobs gists
+ * Fetch their id and content and save them
+ *
+ * @param {array} jobs
+ */
 async function getGistsId (jobs) {
   const { data: gists } = await octokit.gists.listPublicForUser({
     username: process.env.GITHUB_USERNAME
