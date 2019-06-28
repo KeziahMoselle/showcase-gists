@@ -19,10 +19,23 @@ const jobs = [
 
 for example "lastActivity" will fetch the last GitHub activity, format the content and create or update the Gist.
 
-> You will need to fill the .env file based on which jobs you enabled.
-> 
-> **PERSONAL_ACCESS_TOKEN** and **GITHUB_USERNAME** are required.
+## Run the project
 
+- `npm install`
+- Comment or uncomment the jobs you want i.e :
+  ```js
+  // src/index.js
+  const jobs = [
+    'lastActivity', <-- Just want the last GitHub activity
+    //'lastTweet',
+    //'WakaTime
+  ]
+  ```
+- You will  the following environment variables :
+  - a GitHub `PERSONAL_ACCESS_TOKEN` with the gist scope (**required**)
+  - `GITHUB_USERNAME` (**required**)
+
+Additionals jobs may require other environment variables.
 
 ### Output
 
