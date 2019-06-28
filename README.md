@@ -31,7 +31,7 @@ for example "lastActivity" will fetch the last GitHub activity, format the conte
     //'WakaTime
   ]
   ```
-- You will  the following environment variables :
+- You will need the following environment variables (see .env.example) :
   - a GitHub `PERSONAL_ACCESS_TOKEN` with the gist scope (**required**)
   - `GITHUB_USERNAME` (**required**)
 
